@@ -10,7 +10,7 @@ function trackClick(label: string) {
 
 const plans = [
   {
-    name: 'Start',
+    name: 'Concept & Direction',
     from: '₦600,000',
     description:
       'For clients who need initial project direction, concept development and clarity before committing to a full architectural design.',
@@ -20,12 +20,12 @@ const plans = [
       'Preliminary spatial ideas',
       'Design approach recommendation',
     ],
-    cta: 'Discuss My Project',
-    ctaId: 'pricing-start',
+    cta: 'Start Your Project',
+    ctaId: 'pricing_concept',
     featured: false,
   },
   {
-    name: 'Design',
+    name: 'Residential Architecture',
     from: '₦1,500,000',
     description:
       'For clients ready to develop a professional residential architectural design, including spatial planning and 3D visualisation.',
@@ -36,12 +36,12 @@ const plans = [
       'Floor plans & elevations',
       'Design review & revisions',
     ],
-    cta: 'Start My Design',
-    ctaId: 'pricing-design',
+    cta: 'Start Your Project',
+    ctaId: 'pricing_residential',
     featured: true,
   },
   {
-    name: 'Masterplan',
+    name: 'Masterplanning',
     from: '₦4,500,000',
     description:
       'For larger residential developments, compounds and more comprehensive planning requirements across multiple units or phases.',
@@ -52,8 +52,8 @@ const plans = [
       '3D visualisation suite',
       'Extended design consultation',
     ],
-    cta: 'Discuss My Development',
-    ctaId: 'pricing-masterplan',
+    cta: 'Start Your Project',
+    ctaId: 'pricing_masterplan',
     featured: false,
   },
 ];
@@ -68,15 +68,15 @@ export default function Pricing() {
     <section className="section-py bg-[#faf9f7]" id="pricing">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Heading */}
-        <ScrollReveal className="mb-16 max-w-xl">
-          <span className="block text-[#b5784e] text-xs font-semibold tracking-[0.25em] uppercase mb-6">
-            Starting Points
+        <ScrollReveal className="mb-14 max-w-xl">
+          <span className="block text-[#b5784e] text-xs font-semibold tracking-[0.25em] uppercase mb-4">
+            Transparent Pricing
           </span>
           <h2 className="heading-section text-3xl lg:text-5xl text-[#1a1a1a] mb-4">
             Understand the investment.
           </h2>
           <p className="text-base text-[#7a6f67] leading-relaxed">
-            These are starting points, not fixed quotes. Final fees depend on project size, complexity, location and scope. We discuss this transparently at the outset.
+            Starting points for our architectural services. Final fees depend on project size, complexity, location and scope.
           </p>
         </ScrollReveal>
 
@@ -94,12 +94,12 @@ export default function Pricing() {
                       {plan.name}
                     </span>
                     <div className="text-3xl font-bold text-[#1a1a1a] tracking-tight">
-                      From {plan.from}
+                      Starting From {plan.from}
                     </div>
                   </div>
                   {plan.featured && (
                     <span className="text-[0.65rem] font-semibold tracking-widest uppercase bg-[#1a1a1a] text-white px-2 py-1">
-                      Most common
+                      Most Common
                     </span>
                   )}
                 </div>
@@ -120,7 +120,7 @@ export default function Pricing() {
                 <button
                   onClick={() => { scrollToForm(); trackClick(plan.ctaId); }}
                   id={plan.ctaId}
-                  className={plan.featured ? 'btn-primary w-full justify-center' : 'btn-outline-dark w-full justify-center'}
+                  className={plan.featured ? 'btn-copper w-full justify-center' : 'btn-outline-dark w-full justify-center'}
                 >
                   {plan.cta}
                 </button>
@@ -132,7 +132,7 @@ export default function Pricing() {
         {/* Disclaimer */}
         <ScrollReveal delay={200}>
           <p className="text-xs text-[#a89e95] leading-relaxed text-center max-w-xl mx-auto">
-            Final fees depend on project size, complexity, location and scope. All fees are discussed and agreed transparently before work begins. We do not use countdown timers, fake discounts or artificial pressure.
+            Final fees depend on project size, complexity, location and scope. All fees are agreed transparently before work begins.
           </p>
         </ScrollReveal>
       </div>

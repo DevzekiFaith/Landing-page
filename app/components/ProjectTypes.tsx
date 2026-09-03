@@ -1,6 +1,7 @@
 'use client';
 
 import ScrollReveal from './ScrollReveal';
+import { MAIN_WEBSITE_URL, ExternalLinkIcon } from './Header';
 
 function trackClick(label: string) {
   if (typeof window !== 'undefined' && (window as any).gtag) {
@@ -10,52 +11,52 @@ function trackClick(label: string) {
 
 const projectTypes = [
   {
-    title: 'Family Home',
-    description: 'Bungalows, duplexes and contemporary family residences designed around how you actually live.',
+    title: 'FAMILY HOMES',
+    description: 'Bungalows, duplexes and family residences planned around practical living and long-term comfort.',
     tag: 'Residential',
   },
   {
-    title: 'Luxury Residence',
-    description: 'Designed around lifestyle, privacy, comfort and architectural character. For clients with a clear vision of quality.',
+    title: 'LUXURY RESIDENCES',
+    description: 'High-end custom homes designed around privacy, light, comfort and distinct architectural character.',
     tag: 'Premium',
   },
   {
-    title: 'Investment Property',
-    description: 'Residential developments designed with functionality and long-term value in mind.',
-    tag: 'Rental / Investment',
+    title: 'DUPLEXES & BUNGALOWS',
+    description: 'Efficient contemporary designs tailored to site dimensions, climate and family requirements.',
+    tag: 'Single & Multi-Level',
   },
   {
-    title: 'Apartments & Multi-Unit',
-    description: 'For clients developing rental or multi-family property. Efficient planning for multi-storey residential.',
+    title: 'APARTMENTS',
+    description: 'Multi-storey residential developments planned for functionality, natural ventilation and aesthetics.',
     tag: 'Multi-Unit',
   },
   {
-    title: 'Residential Masterplan',
-    description: 'For larger plots, family compounds and development opportunities requiring comprehensive spatial planning.',
+    title: 'INVESTMENT DEVELOPMENTS',
+    description: 'Rental property developments designed with long-term yield and market appeal in mind.',
+    tag: 'Investment',
+  },
+  {
+    title: 'RESIDENTIAL MASTERPLANS',
+    description: 'Comprehensive planning for larger compounds, family estates and multi-unit land developments.',
     tag: 'Large Scale',
   },
   {
-    title: 'Commercial / Special',
-    description: 'For clients with more complex spatial or development requirements beyond standard residential.',
-    tag: 'Commercial',
+    title: 'COMMERCIAL / SPECIAL PROJECTS',
+    description: 'For clients with unique spatial, commercial or mixed-use development requirements.',
+    tag: 'Specialised',
   },
 ];
 
 export default function ProjectTypes() {
-  const scrollToForm = () => {
-    const form = document.getElementById('project-form');
-    if (form) form.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
-    <section className="section-py bg-[#faf9f7]" id="what-we-design">
+    <section className="section-py bg-[#fafafa]" id="what-we-design">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Heading */}
-        <ScrollReveal className="mb-16 max-w-xl">
-          <span className="block text-[#b5784e] text-xs font-semibold tracking-[0.25em] uppercase mb-6">
-            Scope of Work
+        <ScrollReveal className="mb-14 max-w-xl">
+          <span className="block text-[#737373] text-xs font-semibold tracking-[0.25em] uppercase mb-3">
+            Design Scope
           </span>
-          <h2 className="heading-section text-3xl lg:text-5xl text-[#1a1a1a]">
+          <h2 className="heading-section text-3xl lg:text-5xl text-[#171717]">
             What are you planning to build?
           </h2>
         </ScrollReveal>
@@ -63,49 +64,41 @@ export default function ProjectTypes() {
         {/* Project type grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {projectTypes.map((type, i) => (
-            <ScrollReveal key={type.title} delay={i * 80}>
-              <div className="card-feature h-full flex flex-col justify-between group cursor-pointer">
+            <ScrollReveal key={type.title} delay={i * 70}>
+              <div className="card-feature rounded-2xl h-full flex flex-col justify-between group">
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-xs font-semibold tracking-widest uppercase text-[#b5784e]">
+                    <span className="text-[0.65rem] font-semibold tracking-widest uppercase text-[#171717] bg-[#f4f4f5] px-2.5 py-1 rounded-md">
                       {type.tag}
                     </span>
-                    <span className="text-[#e0d8cf] group-hover:text-[#b5784e] transition-colors duration-300 text-lg">
+                    <span className="text-[#d4d4d4] group-hover:text-[#171717] transition-colors duration-300 text-lg">
                       →
                     </span>
                   </div>
-                  <h3 className="text-lg font-semibold text-[#1a1a1a] mb-3 tracking-tight">
+                  <h3 className="text-base font-bold text-[#171717] mb-3 tracking-wider">
                     {type.title}
                   </h3>
-                  <p className="text-sm text-[#7a6f67] leading-relaxed mb-6">
+                  <p className="text-sm text-[#737373] leading-relaxed">
                     {type.description}
                   </p>
                 </div>
-                <button
-                  onClick={() => { scrollToForm(); trackClick(`project_type_${type.title.toLowerCase().replace(/\s+/g, '_')}`); }}
-                  className="text-xs font-semibold tracking-widest uppercase text-[#1a1a1a] border-b border-[#c4b8a8] hover:border-[#1a1a1a] transition-all duration-200 pb-0.5 self-start"
-                >
-                  Discuss Your Project
-                </button>
               </div>
             </ScrollReveal>
           ))}
         </div>
 
-        {/* CTA */}
-        <ScrollReveal delay={200}>
-          <div className="text-center">
-            <p className="text-sm text-[#7a6f67] mb-6">
-              Not sure which category fits? Tell us about your project and we&apos;ll guide you.
-            </p>
-            <button
-              onClick={() => { scrollToForm(); trackClick('project_types_not_sure'); }}
-              className="btn-primary"
-              id="project-types-cta"
-            >
-              Start My Project
-            </button>
-          </div>
+        {/* CTA linking to Main Website */}
+        <ScrollReveal delay={200} className="text-center">
+          <a
+            href={MAIN_WEBSITE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => trackClick('project_types_explore_services')}
+            className="btn-primary inline-flex items-center gap-2"
+          >
+            Explore Our Services on Main Website
+            <ExternalLinkIcon size={16} />
+          </a>
         </ScrollReveal>
       </div>
     </section>

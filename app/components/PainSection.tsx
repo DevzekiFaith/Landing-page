@@ -13,76 +13,101 @@ const painCards = [
   {
     title: 'You Stay Informed',
     description: 'Review important design decisions remotely. No need to be physically present for each milestone.',
-    icon: '◎',
+    icon: '01',
   },
   {
     title: 'You See Before You Build',
     description: 'Use 3D visualisation to understand your proposed space before construction begins.',
-    icon: '◈',
+    icon: '02',
   },
   {
     title: 'You Know What Comes Next',
     description: 'Work through defined project stages instead of guessing where things stand.',
-    icon: '◇',
+    icon: '03',
   },
   {
     title: 'You Remain Part of the Decision',
     description: 'Distance doesn\'t mean handing over control. Your input shapes every significant design choice.',
-    icon: '◉',
+    icon: '04',
   },
+];
+
+const concerns = [
+  'Poor communication or long delays in updates',
+  'Unclear architectural drawings that lead to misunderstanding',
+  'Anxiety from not being physically present on ground',
+  'Uncertainty about what space is actually being developed',
+  'Costly design changes after construction has started',
+  'Constant travel just to move the initial design process forward',
 ];
 
 export default function PainSection() {
   return (
-    <section className="section-py bg-[#faf9f7]" id="why-elevation">
+    <section className="section-py bg-[#fafafa]" id="why-elevation">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Headline */}
-        <ScrollReveal className="max-w-3xl mb-16">
-          <span className="block text-[#b5784e] text-xs font-semibold tracking-[0.25em] uppercase mb-6">
+        <ScrollReveal className="max-w-3xl mb-14">
+          <span className="block text-[#737373] text-xs font-semibold tracking-[0.25em] uppercase mb-3">
             The Remote Architecture Solution
           </span>
-          <h2 className="heading-section text-3xl lg:text-5xl text-[#1a1a1a] mb-8">
+          <h2 className="heading-section text-3xl lg:text-5xl text-[#171717] mb-6">
             You shouldn&apos;t have to fly home just to get your house designed.
           </h2>
-          <p className="text-lg text-[#7a6f67] leading-relaxed mb-6">
-            Living abroad should not make building in Nigeria harder than it needs to be.
+          <p className="text-lg text-[#171717] font-medium leading-relaxed mb-6">
+            Living abroad shouldn&apos;t mean putting your property plans on hold — or handing every important decision to someone else.
           </p>
-          <div className="space-y-3 text-base text-[#3a3530] leading-relaxed">
-            <p>You may already own land.</p>
-            <p>You may already have a budget.</p>
-            <p>You may even know exactly how you want your home to feel.</p>
-          </div>
-          <p className="text-base text-[#7a6f67] leading-relaxed mt-6">
-            The challenge is turning that vision into a professional design while you are thousands of kilometres away. Elevation Studio gives you a structured way to work with your design team remotely — so you can review, question, adjust and approve important decisions without constantly travelling.
+          <p className="text-base text-[#737373] leading-relaxed">
+            Whether you already own land or are exploring ideas in Lagos, Ogun, Abuja, or elsewhere in Nigeria, the challenge is turning your vision into a professional design while living thousands of kilometres away.
           </p>
         </ScrollReveal>
 
-        {/* Pain cards */}
+        {/* Real Concerns Breakdown */}
+        <ScrollReveal className="mb-14" delay={100}>
+          <div className="bg-white rounded-2xl p-8 lg:p-10 shadow-sm border border-[#f0f0f0]">
+            <h3 className="text-xs font-semibold tracking-widest uppercase text-[#737373] mb-6">
+              Common anxieties we solve for diaspora clients:
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {concerns.map((c) => (
+                <div key={c} className="flex items-start gap-3 text-sm text-[#171717] font-medium">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#171717] mt-2 flex-shrink-0" />
+                  <span>{c}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </ScrollReveal>
+
+        {/* 4 Clean Feature Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {painCards.map((card, i) => (
             <ScrollReveal key={card.title} delay={i * 100}>
-              <div className="card-feature h-full">
-                <div className="text-2xl text-[#b5784e] mb-4">{card.icon}</div>
-                <h3 className="text-sm font-semibold tracking-widest uppercase text-[#1a1a1a] mb-3">
-                  {card.title}
-                </h3>
-                <p className="text-sm text-[#7a6f67] leading-relaxed">
-                  {card.description}
-                </p>
+              <div className="card-feature h-full flex flex-col justify-between">
+                <div>
+                  <span className="text-xl font-extrabold text-[#737373] tracking-tight block mb-4">
+                    {card.icon}
+                  </span>
+                  <h3 className="text-sm font-bold tracking-wider uppercase text-[#171717] mb-3">
+                    {card.title}
+                  </h3>
+                  <p className="text-sm text-[#737373] leading-relaxed">
+                    {card.description}
+                  </p>
+                </div>
               </div>
             </ScrollReveal>
           ))}
         </div>
 
-        {/* Pull-quote + Hybrid CTAs */}
-        <ScrollReveal className="mt-16 lg:mt-20" delay={200}>
-          <div className="bg-[#f5f2ed] border-l-4 border-[#b5784e] p-8 lg:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        {/* Pull-quote + CTAs */}
+        <ScrollReveal className="mt-14" delay={200}>
+          <div className="bg-white rounded-2xl p-8 lg:p-10 shadow-sm border border-[#f0f0f0] flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div>
-              <p className="text-xl lg:text-2xl font-semibold text-[#1a1a1a] leading-snug tracking-tight mb-2">
-                &ldquo;Distance should not mean losing control of your project.&rdquo;
+              <p className="text-xl lg:text-2xl font-semibold text-[#171717] leading-snug tracking-tight mb-2">
+                We understand the problem, and we have a better process.
               </p>
-              <p className="text-sm text-[#7a6f67]">
-                Ready to explore how we can turn your land into an architectural reality?
+              <p className="text-sm text-[#737373]">
+                Distance should not mean losing control of your project.
               </p>
             </div>
 
@@ -92,7 +117,7 @@ export default function PainSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackClick('pain_section_whatsapp')}
-                className="btn-copper flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1da851] border-[#25D366]"
+                className="btn-whatsapp flex items-center justify-center gap-2"
               >
                 <WhatsAppIcon size={16} />
                 Discuss on WhatsApp

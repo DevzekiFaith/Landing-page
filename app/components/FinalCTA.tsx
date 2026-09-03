@@ -11,64 +11,54 @@ function trackClick(label: string) {
 
 export default function FinalCTA() {
   return (
-    <section className="relative overflow-hidden bg-[#1a1a1a] section-py" id="ready-to-talk">
-      {/* Copper top border */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-[#b5784e]" />
-
-      {/* Background texture */}
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: `linear-gradient(rgba(250,249,247,1) 1px, transparent 1px), linear-gradient(90deg, rgba(250,249,247,1) 1px, transparent 1px)`,
-          backgroundSize: '80px 80px',
-        }}
-      />
-
+    <section className="relative overflow-hidden bg-[#fafafa] section-py" id="ready-to-talk">
       <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-center">
         <ScrollReveal>
-          <span className="block text-[#b5784e] text-xs font-semibold tracking-[0.25em] uppercase mb-8">
-            Ready to Begin?
-          </span>
-          <h2 className="heading-display text-4xl sm:text-5xl lg:text-6xl text-white mb-6">
-            Ready to talk about your project?
-          </h2>
-          <p className="text-lg text-white/70 leading-relaxed mb-4 max-w-2xl mx-auto">
-            You don&apos;t need to have everything figured out before you contact us.
-          </p>
-          <p className="text-base text-white/50 leading-relaxed mb-12 max-w-xl mx-auto">
-            If you already own land, have a survey, have sketches or simply have an idea — start the conversation directly with our design team.
-          </p>
+          <div className="bg-white rounded-2xl p-10 lg:p-14 shadow-sm border border-[#f0f0f0]">
+            <span className="block text-[#737373] text-xs font-semibold tracking-[0.25em] uppercase mb-4">
+              Ready to Begin?
+            </span>
+            <h2 className="heading-display text-4xl sm:text-5xl lg:text-6xl text-[#171717] mb-6">
+              READY TO TALK ABOUT YOUR PROJECT?
+            </h2>
+            <p className="text-lg text-[#171717] leading-relaxed mb-4 max-w-2xl mx-auto font-medium">
+              You don&apos;t need to have everything figured out before you contact us.
+            </p>
+            <p className="text-base text-[#737373] leading-relaxed mb-10 max-w-xl mx-auto">
+              If you already own land, have a survey, have sketches, or simply have an idea, start the conversation directly with our design team.
+            </p>
 
-          {/* Hybrid CTAs */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => trackClick('final_cta_primary_whatsapp')}
-              className="btn-copper flex items-center justify-center gap-2.5 bg-[#25D366] hover:bg-[#1da851] border-[#25D366]"
-              id="final-cta-primary"
-            >
-              <WhatsAppIcon size={18} />
-              Start Project on WhatsApp
-            </a>
+            {/* Direct CTAs */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackClick('final_cta_whatsapp_primary')}
+                className="btn-whatsapp flex items-center justify-center gap-2.5"
+                id="final-cta-primary"
+              >
+                <WhatsAppIcon size={18} />
+                Start Project on WhatsApp
+              </a>
 
-            <a
-              href={MAIN_WEBSITE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => trackClick('final_cta_secondary_main_site')}
-              className="btn-outline flex items-center justify-center gap-2"
-              id="final-cta-secondary"
-            >
-              Explore Main Website
-              <ExternalLinkIcon size={16} />
-            </a>
+              <a
+                href={MAIN_WEBSITE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackClick('final_cta_explore_studio')}
+                className="btn-outline-dark flex items-center justify-center gap-2"
+                id="final-cta-secondary"
+              >
+                Explore Main Studio Website
+                <ExternalLinkIcon size={16} />
+              </a>
+            </div>
+
+            <p className="text-xs text-[#a3a3a3] tracking-wider uppercase font-medium">
+              Direct Architect Consultation • Fast Response • No Obligation
+            </p>
           </div>
-
-          <p className="text-xs text-white/40 tracking-wider uppercase">
-            Fast Response • Direct Architect Consultation • No Obligation
-          </p>
         </ScrollReveal>
       </div>
     </section>

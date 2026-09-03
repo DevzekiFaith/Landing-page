@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import ScrollReveal from './ScrollReveal';
+import { MAIN_WEBSITE_URL, WHATSAPP_URL, WhatsAppIcon, ExternalLinkIcon } from './Header';
 
 function trackEvent(eventName: string, data?: Record<string, string>) {
   if (typeof window !== 'undefined' && (window as any).gtag) {
@@ -32,26 +33,25 @@ export default function LeadForm() {
   ) => {
     if (!touched) {
       setTouched(true);
-      trackEvent('form_start', { form_id: 'project_enquiry' });
+      trackEvent('form_start', { form_id: 'diaspora_project_enquiry' });
     }
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    trackEvent('form_submit', { form_id: 'project_enquiry' });
+    trackEvent('form_submit', { form_id: 'diaspora_project_enquiry' });
     setSubmitted(true);
-    setForm(initialState);
   };
 
   return (
     <section className="section-py bg-[#f5f2ed]" id="project-form">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="lg:grid lg:grid-cols-2 lg:gap-20 items-start">
-          {/* Left — context */}
+          {/* Left — context & WhatsApp secondary option */}
           <ScrollReveal className="mb-12 lg:mb-0">
-            <span className="block text-[#b5784e] text-xs font-semibold tracking-[0.25em] uppercase mb-6">
-              Start Here
+            <span className="block text-[#b5784e] text-xs font-semibold tracking-[0.25em] uppercase mb-4">
+              Start Your Project
             </span>
             <h2 className="heading-section text-3xl lg:text-5xl text-[#1a1a1a] mb-6">
               Tell us about your project.
@@ -59,41 +59,86 @@ export default function LeadForm() {
             <p className="text-base text-[#7a6f67] leading-relaxed mb-8">
               You don&apos;t need to have everything figured out before you contact us. If you already own land, have a survey, have sketches or simply have an idea — start the conversation. We&apos;ll take it from there.
             </p>
-            <div className="space-y-4">
+
+            <div className="space-y-4 mb-10">
               {[
                 'Remote consultations available',
                 'No obligation to proceed after initial discussion',
                 'Nigeria-based professional studio',
-                'We work with clients in the UK, USA, Canada, Europe and worldwide',
+                'Serving clients in UK, USA, Canada, Europe & Middle East',
               ].map((item) => (
                 <div key={item} className="flex items-start gap-3">
-                  <span className="text-[#b5784e] flex-shrink-0 mt-0.5">—</span>
+                  <span className="text-[#b5784e] flex-shrink-0 font-bold mt-0.5">—</span>
                   <span className="text-sm text-[#3a3530] leading-relaxed">{item}</span>
                 </div>
               ))}
             </div>
+
+            {/* Section 16 — Secondary WhatsApp option */}
+            <div className="bg-white border border-[#e0d8cf] p-6">
+              <span className="text-xs font-semibold tracking-widest uppercase text-[#b5784e] block mb-2">
+                HAVE A QUICK QUESTION?
+              </span>
+              <p className="text-sm text-[#7a6f67] mb-4">
+                Prefer to send a direct message? Speak directly with Elevation Studio on WhatsApp.
+              </p>
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackEvent('form_side_whatsapp_click')}
+                className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-[#25D366] hover:text-[#1da851] transition-colors"
+              >
+                <WhatsAppIcon size={16} />
+                Chat with Elevation Studio on WhatsApp
+              </a>
+            </div>
           </ScrollReveal>
 
-          {/* Right — form */}
+          {/* Right — Lead Qualification Form */}
           <ScrollReveal delay={150}>
             {submitted ? (
-              <div className="bg-white border border-[#e0d8cf] p-10 text-center">
+              <div className="bg-white border border-[#e0d8cf] p-8 lg:p-12 text-center">
                 <div className="text-4xl text-[#b5784e] mb-4">✓</div>
-                <h3 className="text-xl font-semibold text-[#1a1a1a] mb-4 tracking-tight">
-                  Project details received.
+                <h3 className="text-2xl font-bold text-[#1a1a1a] mb-4 tracking-tight">
+                  THANK YOU. WE&apos;VE RECEIVED YOUR PROJECT DETAILS.
                 </h3>
-                <p className="text-sm text-[#7a6f67] leading-relaxed">
-                  Thank you. Your project information has been received. Elevation Studio will review your details and contact you regarding the next step.
+                <p className="text-sm text-[#7a6f67] leading-relaxed mb-8">
+                  Your information has been received. The Elevation Studio team will review your project and contact you regarding the next step.
                 </p>
+
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <a
+                    href={MAIN_WEBSITE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => trackEvent('post_submit_explore_studio')}
+                    className="btn-copper flex items-center justify-center gap-2"
+                  >
+                    Explore Elevation Studio
+                    <ExternalLinkIcon size={14} />
+                  </a>
+
+                  <a
+                    href={WHATSAPP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => trackEvent('post_submit_whatsapp')}
+                    className="btn-outline-dark flex items-center justify-center gap-2"
+                  >
+                    <WhatsAppIcon size={16} />
+                    Chat with Us on WhatsApp
+                  </a>
+                </div>
               </div>
             ) : (
               <form
                 onSubmit={handleSubmit}
-                className="bg-white border border-[#e0d8cf] p-8 lg:p-10"
+                className="bg-white border border-[#e0d8cf] p-8 lg:p-10 shadow-sm"
                 noValidate
               >
-                <h3 className="text-sm font-semibold tracking-widest uppercase text-[#1a1a1a] mb-8">
-                  Project Enquiry
+                <h3 className="text-sm font-semibold tracking-widest uppercase text-[#1a1a1a] mb-6 border-b border-[#e0d8cf] pb-3">
+                  Project Qualification Form
                 </h3>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
@@ -165,7 +210,7 @@ export default function LeadForm() {
 
                   {/* Property location */}
                   <div>
-                    <label htmlFor="propertyLocation" className="form-label">Where is your property / land? *</label>
+                    <label htmlFor="propertyLocation" className="form-label">Where is your property located? *</label>
                     <input
                       id="propertyLocation"
                       name="propertyLocation"
@@ -209,9 +254,9 @@ export default function LeadForm() {
                       <option>Bungalow</option>
                       <option>Duplex</option>
                       <option>Luxury residence</option>
-                      <option>Apartments</option>
+                      <option>Apartment</option>
                       <option>Rental development</option>
-                      <option>Commercial property</option>
+                      <option>Commercial</option>
                       <option>Masterplan</option>
                       <option>Other</option>
                     </select>
@@ -228,12 +273,12 @@ export default function LeadForm() {
                       className="form-select"
                     >
                       <option value="">Select stage</option>
-                      <option>Just exploring</option>
-                      <option>I own land</option>
-                      <option>I have a survey</option>
-                      <option>I have an existing design</option>
-                      <option>Ready to start design</option>
-                      <option>Ready for construction</option>
+                      <option>Exploring</option>
+                      <option>Own land</option>
+                      <option>Have survey</option>
+                      <option>Have existing design</option>
+                      <option>Ready to begin design</option>
+                      <option>Preparing for construction</option>
                     </select>
                   </div>
 
@@ -264,11 +309,11 @@ export default function LeadForm() {
                     <textarea
                       id="message"
                       name="message"
-                      rows={4}
+                      rows={3}
                       value={form.message}
                       onChange={handleChange}
                       className="form-input resize-none"
-                      placeholder="Describe your project, any ideas you have, or questions you'd like us to address..."
+                      placeholder="Describe your plot, ideas, or questions for our team..."
                     />
                   </div>
                 </div>
@@ -280,10 +325,6 @@ export default function LeadForm() {
                 >
                   Send My Project Details
                 </button>
-
-                <p className="text-xs text-[#a89e95] text-center mt-4 leading-relaxed">
-                  Your information is used solely to respond to your project enquiry and will not be shared with third parties.
-                </p>
               </form>
             )}
           </ScrollReveal>

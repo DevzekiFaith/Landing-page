@@ -41,7 +41,7 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
+    const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -55,12 +55,12 @@ export default function Header() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-[#1a1a1a]/95 backdrop-blur-md shadow-md border-b border-[#3a3530]' : 'bg-transparent'
+        scrolled ? 'bg-[#141312]/90 backdrop-blur-md border-b border-white/10 py-3' : 'bg-transparent py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20">
-          {/* Logo linking to Main Website */}
+        <div className="flex items-center justify-between">
+          {/* Logo */}
           <a
             href={MAIN_WEBSITE_URL}
             target="_blank"
@@ -69,50 +69,50 @@ export default function Header() {
             className="flex items-center gap-3 group"
           >
             <div className="flex flex-col">
-              <span className="text-sm font-bold tracking-[0.18em] uppercase text-white group-hover:text-[#b5784e] transition-colors">
+              <span className="text-sm font-bold tracking-[0.2em] uppercase text-white transition-colors">
                 ELEVATION
               </span>
-              <span className="text-[0.6rem] tracking-[0.25em] uppercase text-[#b5784e]">
+              <span className="text-[0.55rem] tracking-[0.3em] uppercase text-white/60">
                 STUDIO
               </span>
             </div>
           </a>
 
           {/* Desktop Navigation CTAs */}
-          <div className="hidden md:flex items-center gap-5">
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => trackClick('header_whatsapp')}
-              className="flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-[#25D366] hover:text-[#1da851] transition-colors"
-            >
-              <WhatsAppIcon size={16} />
-              WhatsApp
-            </a>
-
+          <div className="hidden md:flex items-center gap-6">
             <a
               href={MAIN_WEBSITE_URL}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => trackClick('header_main_website')}
-              className="flex items-center gap-2 text-xs font-semibold tracking-widest uppercase px-5 py-2.5 bg-[#b5784e] text-white border-2 border-[#b5784e] hover:bg-transparent hover:text-white transition-all duration-200"
+              className="text-xs font-semibold tracking-widest uppercase text-white/70 hover:text-white transition-colors flex items-center gap-1.5"
             >
-              Enquire on Main Website
-              <ExternalLinkIcon size={14} />
+              Main Website
+              <ExternalLinkIcon size={12} />
+            </a>
+
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackClick('header_whatsapp')}
+              className="btn-whatsapp px-5 py-2.5 text-xs rounded-full flex items-center gap-2"
+            >
+              <WhatsAppIcon size={15} />
+              WhatsApp Direct
             </a>
           </div>
 
           {/* Mobile Direct Enquiry CTA */}
           <a
-            href={MAIN_WEBSITE_URL}
+            href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => trackClick('header_mobile_main_site')}
-            className="md:hidden flex items-center gap-1.5 text-xs font-semibold tracking-widest uppercase px-3.5 py-2 border border-[#b5784e] text-[#b5784e] hover:bg-[#b5784e] hover:text-white transition-all"
+            onClick={() => trackClick('header_mobile_whatsapp')}
+            className="md:hidden flex items-center gap-1.5 text-xs font-semibold tracking-widest uppercase px-4 py-2 rounded-full bg-[#25D366] text-white"
           >
-            Main Site
-            <ExternalLinkIcon size={12} />
+            <WhatsAppIcon size={14} />
+            WhatsApp
           </a>
         </div>
       </div>

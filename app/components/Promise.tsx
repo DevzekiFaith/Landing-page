@@ -12,74 +12,80 @@ function trackClick(label: string) {
 export default function Promise() {
   return (
     <section
-      className="relative overflow-hidden bg-[#1a1a1a] section-py"
+      className="relative overflow-hidden bg-[#141312] text-white section-py"
       aria-label="Brand promise section"
     >
-      {/* Background texture */}
-      <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
-        style={{
-          backgroundImage: `linear-gradient(rgba(250,249,247,1) 1px, transparent 1px), linear-gradient(90deg, rgba(250,249,247,1) 1px, transparent 1px)`,
-          backgroundSize: '80px 80px',
-        }}
-      />
-
-      {/* Copper accent bar */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-[#b5784e]" />
-
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <div className="lg:grid lg:grid-cols-2 lg:gap-20 items-center">
           {/* Left — large statement */}
           <ScrollReveal>
             <div className="mb-12 lg:mb-0">
-              <h2 className="heading-display text-5xl sm:text-6xl lg:text-7xl text-white leading-none mb-8">
+              <h2 className="heading-display text-5xl sm:text-6xl lg:text-7xl text-white leading-none mb-6">
                 YOUR LAND IS
                 <br />
                 IN NIGERIA.
                 <br />
-                <span className="text-[#b5784e]">YOUR ARCHITECT</span>
+                <span className="text-white/60">YOUR ARCHITECT</span>
                 <br />
                 CAN BE TOO.
               </h2>
-              <div className="w-16 h-1 bg-[#b5784e] mb-8" />
             </div>
           </ScrollReveal>
 
-          {/* Right — copy + Hybrid CTAs */}
+          {/* Right — copy + Offerings + CTAs */}
           <ScrollReveal delay={200}>
             <div>
-              <p className="text-lg text-white/80 leading-relaxed mb-6">
-                You don&apos;t need to be in Nigeria every week to begin designing your property.
+              <p className="text-lg text-white/90 leading-relaxed mb-6 font-medium">
+                Whether you are in London, Manchester, Toronto, Houston, Dubai or elsewhere, you can begin your architectural project in Nigeria without making a trip home just to start the design process.
               </p>
-              <p className="text-base text-white/60 leading-relaxed mb-8">
-                Whether you&apos;re planning a family home, investment property, retirement residence, rental development or a larger residential project, Elevation Studio can work with you remotely while remaining locally grounded in Nigeria.
-              </p>
-              <p className="text-base text-white/60 leading-relaxed mb-10">
-                Whether you live in London, Manchester, Toronto, Houston, Birmingham, Accra, Dubai or anywhere else — start your project conversation directly with our team.
-              </p>
+
+              {/* Location chips */}
+              <div className="flex flex-wrap gap-2 mb-8">
+                {['London', 'Manchester', 'Houston', 'Toronto', 'Dubai', 'Atlanta', 'Europe'].map((city) => (
+                  <span key={city} className="text-xs font-semibold uppercase tracking-wider bg-white/10 text-white/90 px-3 py-1.5 rounded-full border border-white/15">
+                    {city}
+                  </span>
+                ))}
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10 border-y border-white/15 py-6">
+                {[
+                  'Remote Consultation',
+                  'Professional Architectural Design',
+                  '3D Visualisation',
+                  'Structured Reviews',
+                  'Clear Project Milestones',
+                  'Local Grounded Expertise',
+                ].map((item) => (
+                  <div key={item} className="flex items-center gap-2.5 text-xs font-semibold tracking-wider uppercase text-white/80">
+                    <span className="w-1.5 h-1.5 rounded-full bg-white flex-shrink-0" />
+                    {item}
+                  </div>
+                ))}
+              </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
                   href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => trackClick('promise_primary_whatsapp')}
-                  className="btn-copper flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1da851] border-[#25D366]"
+                  onClick={() => trackClick('promise_whatsapp_start')}
+                  className="btn-whatsapp flex items-center justify-center gap-2"
                   id="promise-cta-primary"
                 >
                   <WhatsAppIcon size={18} />
-                  Discuss Project on WhatsApp
+                  Start Project on WhatsApp
                 </a>
 
                 <a
                   href={MAIN_WEBSITE_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => trackClick('promise_secondary_main_site')}
+                  onClick={() => trackClick('promise_explore_studio')}
                   className="btn-outline flex items-center justify-center gap-2"
                   id="promise-cta-secondary"
                 >
-                  Visit Main Website
+                  Explore Elevation Studio
                   <ExternalLinkIcon size={16} />
                 </a>
               </div>
