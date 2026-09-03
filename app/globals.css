@@ -1,26 +1,494 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Elevation Studio Brand */
+  --color-es-charcoal: #1a1a1a;
+  --color-es-warm-white: #faf9f7;
+  --color-es-cream: #f5f2ed;
+  --color-es-sand: #e8e0d5;
+  --color-es-stone: #c4b8a8;
+  --color-es-copper: #b5784e;
+  --color-es-copper-light: #c98f68;
+  --color-es-copper-dark: #8a5a35;
+  --color-es-graphite: #3a3530;
+  --color-es-text: #2d2926;
+  --color-es-muted: #7a6f67;
+  --color-es-border: #e0d8cf;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #faf9f7;
+  --foreground: #2d2926;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), 'Inter', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f5f2ed;
+}
+::-webkit-scrollbar-thumb {
+  background: #c4b8a8;
+  border-radius: 3px;
+}
+
+/* Animations */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(181, 120, 78, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(181, 120, 78, 0); }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.7s ease forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.animate-slide-left {
+  animation: slideInLeft 0.6s ease forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2s infinite;
+}
+
+/* Delay utilities */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-600 { animation-delay: 600ms; }
+.delay-700 { animation-delay: 700ms; }
+
+/* Scroll reveal styles - always 100% visible */
+.reveal, .reveal.visible, .reveal-left, .reveal-left.visible {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Typography */
+.heading-display {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.heading-section {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+/* Copper accent line */
+.accent-line::before {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: #b5784e;
+  margin-bottom: 1.5rem;
+}
+
+/* CTA Button styles */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #1a1a1a;
+  color: #faf9f7;
+  padding: 1rem 2rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 2px solid #1a1a1a;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background: transparent;
+  color: #1a1a1a;
+}
+
+.btn-copper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #b5784e;
+  color: #faf9f7;
+  padding: 1rem 2rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 2px solid #b5784e;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-copper:hover {
+  background: #8a5a35;
+  border-color: #8a5a35;
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  color: #faf9f7;
+  padding: 1rem 2rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 2px solid rgba(250, 249, 247, 0.5);
+  transition: all 0.25s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-outline:hover {
+  background: rgba(250, 249, 247, 0.1);
+  border-color: #faf9f7;
+}
+
+.btn-outline-dark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  color: #1a1a1a;
+  padding: 1rem 2rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 2px solid #1a1a1a;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-outline-dark:hover {
+  background: #1a1a1a;
+  color: #faf9f7;
+}
+
+/* Card styles */
+.card-feature {
+  background: #ffffff;
+  border: 1px solid #e0d8cf;
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.card-feature:hover {
+  border-color: #b5784e;
+  box-shadow: 0 8px 32px rgba(181, 120, 78, 0.1);
+  transform: translateY(-4px);
+}
+
+/* Form styles */
+.form-input {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e0d8cf;
+  padding: 0.875rem 1rem;
+  font-size: 0.9375rem;
+  color: #2d2926;
+  transition: border-color 0.2s ease;
+  outline: none;
+  font-family: inherit;
+}
+
+.form-input:focus {
+  border-color: #b5784e;
+}
+
+.form-input::placeholder {
+  color: #a89e95;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #7a6f67;
+  margin-bottom: 0.5rem;
+}
+
+.form-select {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e0d8cf;
+  padding: 0.875rem 1rem;
+  font-size: 0.9375rem;
+  color: #2d2926;
+  transition: border-color 0.2s ease;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a6f67' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  font-family: inherit;
+}
+
+.form-select:focus {
+  border-color: #b5784e;
+}
+
+/* FAQ accordion */
+.faq-item {
+  border-bottom: 1px solid #e0d8cf;
+}
+
+.faq-question {
+  width: 100%;
+  text-align: left;
+  padding: 1.5rem 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #2d2926;
+  gap: 1rem;
+  font-family: inherit;
+}
+
+.faq-answer {
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  max-height: 0;
+  opacity: 0;
+}
+
+.faq-answer.open {
+  max-height: 400px;
+  opacity: 1;
+}
+
+.faq-answer-inner {
+  padding-bottom: 1.5rem;
+  color: #7a6f67;
+  line-height: 1.75;
+  font-size: 0.9375rem;
+}
+
+/* Sticky WhatsApp button */
+.whatsapp-sticky {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #25D366;
+  color: white;
+  padding: 0.875rem 1.25rem;
+  border-radius: 50px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
+  transition: all 0.25s ease;
+  animation: pulseGlow 2.5s infinite;
+}
+
+.whatsapp-sticky:hover {
+  background: #1da851;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(37, 211, 102, 0.4);
+}
+
+/* Hero overlay gradient */
+.hero-overlay {
+  background: linear-gradient(
+    105deg,
+    rgba(26, 26, 26, 0.92) 0%,
+    rgba(26, 26, 26, 0.7) 50%,
+    rgba(26, 26, 26, 0.35) 100%
+  );
+}
+
+/* Section divider */
+.section-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #e0d8cf, transparent);
+}
+
+/* Number cards */
+.step-number {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #e0d8cf;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+/* Trust pillars */
+.trust-pillar {
+  border-top: 3px solid #b5784e;
+  padding-top: 1.5rem;
+}
+
+/* Pricing card */
+.pricing-card {
+  background: #ffffff;
+  border: 1px solid #e0d8cf;
+  padding: 2.5rem;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.pricing-card:hover {
+  border-color: #b5784e;
+  box-shadow: 0 12px 40px rgba(181, 120, 78, 0.12);
+}
+
+.pricing-card.featured {
+  border-color: #1a1a1a;
+  border-width: 2px;
+}
+
+/* Radio group */
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e0d8cf;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: #ffffff;
+}
+
+.radio-option:hover {
+  border-color: #b5784e;
+}
+
+.radio-option input {
+  accent-color: #b5784e;
+}
+
+/* Project type grid cards */
+.project-card {
+  background: #1a1a1a;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  cursor: pointer;
+  group: true;
+}
+
+/* WhatsApp icon */
+.wa-icon {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+/* Page section spacing */
+.section-py {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+@media (max-width: 768px) {
+  .section-py {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .whatsapp-sticky {
+    bottom: 1rem;
+    right: 1rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.75rem;
+  }
+
+  .btn-primary,
+  .btn-copper,
+  .btn-outline,
+  .btn-outline-dark {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.75rem;
+  }
 }
