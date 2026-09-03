@@ -1,6 +1,6 @@
 'use client';
 
-import ScrollReveal from './ScrollReveal';
+import { motion } from 'framer-motion';
 import { MAIN_WEBSITE_URL, ExternalLinkIcon } from './Header';
 
 function trackClick(label: string) {
@@ -9,11 +9,18 @@ function trackClick(label: string) {
   }
 }
 
+const EASE_CUBIC = [0.16, 1, 0.3, 1] as const;
+
 export default function MainStudioSection() {
   return (
     <section className="section-py bg-[#ffffff]" id="explore-main-studio">
       <div className="max-w-5xl mx-auto px-6 lg:px-8 text-center">
-        <ScrollReveal>
+        <motion.div
+          initial={{ opacity: 0, y: 36, scale: 0.97 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.7, ease: EASE_CUBIC }}
+        >
           <div className="bg-[#fafafa] border border-[#f0f0f0] rounded-2xl p-10 lg:p-14 shadow-sm">
             <span className="block text-[#737373] text-xs font-semibold tracking-[0.25em] uppercase mb-4">
               Elevation Studio Portal
@@ -24,18 +31,16 @@ export default function MainStudioSection() {
             <p className="text-base lg:text-lg text-[#737373] leading-relaxed mb-8 max-w-2xl mx-auto">
               This page is designed specifically for clients living abroad. Explore our main studio to see our wider body of work, services, projects and design capabilities.
             </p>
-            <a
-              href={MAIN_WEBSITE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => trackClick('main_studio_section_explore')}
+            <motion.a
+              href={MAIN_WEBSITE_URL} target="_blank" rel="noopener noreferrer"
+              onClick={() => trackClick('main_studio_explore')}
               className="btn-primary inline-flex items-center gap-2"
+              whileHover={{ scale: 1.05, y: -3 }} whileTap={{ scale: 0.97 }}
             >
-              Explore Elevation Studio
-              <ExternalLinkIcon size={16} />
-            </a>
+              Explore Elevation Studio <ExternalLinkIcon size={16} />
+            </motion.a>
           </div>
-        </ScrollReveal>
+        </motion.div>
       </div>
     </section>
   );

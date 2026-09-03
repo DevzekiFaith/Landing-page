@@ -1,6 +1,7 @@
 'use client';
 
-import ScrollReveal from './ScrollReveal';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const faqs = [
   {
@@ -20,10 +21,6 @@ const faqs = [
     a: 'Yes. Design reviews are conducted remotely through digital presentations, scaled drawings, and 3D visualisations. You review, ask questions, and approve at key design stages from wherever you live.',
   },
   {
-    q: 'HOW MUCH DOES ARCHITECTURAL DESIGN COST?',
-    a: 'Starting points are: ₦600,000 for concept and initial project direction; ₦1,500,000 for a full residential architectural design; ₦4,500,000 for masterplan-level development design. Final fees depend on project size, location, complexity and scope.',
-  },
-  {
     q: 'DO YOU ALSO HANDLE CONSTRUCTION?',
     a: 'Elevation Studio focuses on the architectural design stage. This includes concept development, spatial planning, floor plans, elevations, 3D visualisation and design documentation. Services related to construction, contractor selection, site supervision and regulatory approvals are discussed at consultation based on project scope.',
   },
@@ -34,71 +31,79 @@ const faqs = [
 ];
 
 export default function FAQ() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
   const toggleFaq = (index: number) => {
-    const answer = document.getElementById(`faq-answer-${index}`);
-    const icon = document.getElementById(`faq-icon-${index}`);
-    if (!answer) return;
-
-    const isOpen = answer.classList.contains('open');
-
-    // Close all
-    document.querySelectorAll('.faq-answer').forEach((el) => el.classList.remove('open'));
-    document.querySelectorAll('.faq-icon').forEach((el) => {
-      (el as HTMLElement).style.transform = 'rotate(0deg)';
-    });
-
-    if (!isOpen) {
-      answer.classList.add('open');
-      if (icon) icon.style.transform = 'rotate(45deg)';
-    }
+    setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    <section className="section-py bg-[#faf9f7]" id="faq">
+    <section className="section-py bg-[#fafafa]" id="faq">
       <div className="max-w-4xl mx-auto px-6 lg:px-8">
         {/* Heading */}
-        <ScrollReveal className="mb-12">
-          <span className="block text-[#b5784e] text-xs font-semibold tracking-[0.25em] uppercase mb-4">
+        <motion.div
+          className="mb-12"
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <span className="block text-[#737373] text-xs font-semibold tracking-[0.25em] uppercase mb-3">
             Questions
           </span>
-          <h2 className="heading-section text-3xl lg:text-4xl text-[#1a1a1a]">
+          <h2 className="heading-section text-3xl lg:text-4xl text-[#171717]">
             Frequently asked questions.
           </h2>
-        </ScrollReveal>
+        </motion.div>
 
         {/* FAQ items */}
-        <ScrollReveal delay={100}>
-          <div className="border-t border-[#e0d8cf]">
-            {faqs.map((faq, i) => (
-              <div key={i} className="faq-item">
+        <motion.div
+          className="border-t border-[#e5e5e5]"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+        >
+          {faqs.map((faq, i) => {
+            const isOpen = openIndex === i;
+            return (
+              <div key={i} className="border-b border-[#e5e5e5]">
                 <button
-                  className="faq-question"
+                  className="w-full text-left py-6 bg-none border-none cursor-pointer flex justify-between items-center gap-4 text-[#171717] font-semibold text-sm tracking-wide font-sans group"
                   onClick={() => toggleFaq(i)}
-                  aria-expanded="false"
-                  aria-controls={`faq-answer-${i}`}
+                  aria-expanded={isOpen}
                   id={`faq-btn-${i}`}
                 >
-                  <span className="pr-4 text-left font-semibold text-sm tracking-wide">{faq.q}</span>
-                  <span
-                    id={`faq-icon-${i}`}
-                    className="faq-icon flex-shrink-0 w-5 h-5 border border-[#c4b8a8] flex items-center justify-center text-[#b5784e] transition-transform duration-300"
-                    style={{ fontSize: '18px', lineHeight: 1 }}
+                  <span className="pr-4 group-hover:text-black transition-colors">{faq.q}</span>
+                  <motion.span
+                    className="flex-shrink-0 w-6 h-6 rounded-full border border-[#e5e5e5] group-hover:border-[#171717] flex items-center justify-center text-[#171717] text-sm transition-colors"
+                    animate={{ rotate: isOpen ? 45 : 0 }}
+                    transition={{ duration: 0.3 }}
                   >
                     +
-                  </span>
+                  </motion.span>
                 </button>
-                <div
-                  id={`faq-answer-${i}`}
-                  className="faq-answer"
-                  role="region"
-                  aria-labelledby={`faq-btn-${i}`}
-                >
-                  <div className="faq-answer-inner">{faq.a}</div>
-                </div>
+
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      key="content"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="pb-6 text-[#737373] leading-relaxed text-sm">
+                        {faq.a}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
-            ))}
-          </div>
-        </ScrollReveal>
+            );
+          })}
+        </motion.div>
       </div>
     </section>
   );
